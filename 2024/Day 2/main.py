@@ -24,31 +24,25 @@
 with open('./Day 2/input.txt') as file:
     data = file.read().splitlines()
 
-levels = []
-
 example_levels = [[7, 6, 4, 2, 1], [1, 2, 7, 8, 9], [9, 7, 6, 2, 1], [1, 3, 2, 4, 5], [8, 6, 4, 4, 1], [1, 3, 6, 7, 9]]
 
-for level in data:
-    levels.append([int(x) for x in level.split(' ')])
-
-
+levels = [[int(x) for x in level.split(' ')] for level in data]
 safes = 0
 
 for level in levels:
     is_valid = True
     increasing = None
-    edit = 0
+    edit = 0 # Part 2
 
     for i in range(len(level) - 1):
         diff = level[i+1] - level[i]
-        
+
         if increasing is None:
             increasing = diff > 0
-        
+
         if (abs(diff) > 3) or (diff == 0) or (increasing and diff < 0) or (not increasing and diff > 0):
             if edit < 1:
                 edit += 1
-                continue
             else:
                 is_valid = False
                 break

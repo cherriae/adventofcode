@@ -1,10 +1,9 @@
+import pathlib
 import re
 
 
-with open('./Day 3/input.txt') as file:
-    data = file.read()
-
-pattern = r"mul\(\d+,\d+\)|do\(\)|don\'t\(\)" # |do\(\)|don\'t\(\)
+data = pathlib.Path('./Day 3/input.txt').read_text()
+pattern = r"mul\(\d+,\d+\)|do\(\)|don\'t\(\)" # |do\(\)|don\'t\(\) - Part 2
 
 search = re.findall(pattern, data)
 score = 0
@@ -18,13 +17,12 @@ for i in search:
         do = False
         continue
     if do == True:
+        # Part 1
         first, second = i.split(',')
 
         first = first.replace('mul(', '')
         second = second.replace(')', '')
 
         score += int(first) * int(second)
-    
-    
 
 print(score)

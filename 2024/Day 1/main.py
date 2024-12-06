@@ -40,11 +40,7 @@ for item in data:
 row1.sort()
 row2.sort()
 
-distance = 0
-
-for i in range(0, len(row1)):
-    distance += abs(row1[i] - row2[i])
-
+distance = sum(abs(row1[i] - row2[i]) for i in range(len(row1)))
 print(distance)
 
 
@@ -52,9 +48,9 @@ print(distance)
 similarity = 0
 checked_alr = []
 
-for i in range(0, len(row1)):
-    if row2.count(row1[i]) > 0 and row1[i] not in checked_alr:
-        similarity += row2.count(row1[i]) * row1[i]
-        checked_alr.append(row1[i])
+for item_ in row1:
+    if row2.count(item_) > 0 and item_ not in checked_alr:
+        similarity += row2.count(item_) * item_
+        checked_alr.append(item_)
 
 print(similarity)
